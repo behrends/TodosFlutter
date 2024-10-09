@@ -10,7 +10,7 @@ class TodoItem extends StatelessWidget {
     return InkWell(
       onTap: () {/* to be implemented */},
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 2.0),
         child: Row(
           children: [
             Checkbox(
