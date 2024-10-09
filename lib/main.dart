@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/todo_item.dart';
+import 'package:myapp/todo_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,13 +30,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Todo-App'),
       ),
-      body: const Column(
-        children: [
-          TodoItem(title: 'Einkaufen'),
-          TodoItem(title: 'Kochen'),
-          TodoItem(title: 'Sport'),
-        ],
-      ),
+      body: const TodoList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => debugPrint('Todo hinzufügen'),
         tooltip: 'Todo hinzufügen',
