@@ -7,19 +7,22 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Checkbox(
-            value: false,
-            onChanged: (bool? value) { /* to be implemented */},
-          ),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 18),
-          ),
-        ],
+    return InkWell(
+      onTap: () {/* to be implemented */},
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          children: [
+            Checkbox(
+              value: false,
+              onChanged: (bool? value) {/* to be implemented */},
+            ),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
       ),
     );
   }
