@@ -36,6 +36,11 @@ class MyHomePage extends StatelessWidget {
           Text('Sport'),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => debugPrint('Todo hinzufügen'),
+        tooltip: 'Todo hinzufügen',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
