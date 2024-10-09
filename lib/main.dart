@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/todo_item.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,9 +32,9 @@ class MyHomePage extends StatelessWidget {
       ),
       body: const Column(
         children: [
-          Text('Einkaufen'),
-          Text('Kochen'),
-          Text('Sport'),
+          TodoItem(title: 'Einkaufen'),
+          TodoItem(title: 'Kochen'),
+          TodoItem(title: 'Sport'),
         ],
       ),
       floatingActionButton: FloatingActionButton(
