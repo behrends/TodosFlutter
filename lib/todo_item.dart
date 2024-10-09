@@ -9,9 +9,17 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 18),
+      child: Row(
+        children: [
+          Checkbox(
+            value: false,
+            onChanged: (bool? value) { /* to be implemented */},
+          ),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 18),
+          ),
+        ],
       ),
     );
   }
