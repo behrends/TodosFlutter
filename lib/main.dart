@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/todo_item.dart';
 import 'package:myapp/todo_list.dart';
 
 void main() {
@@ -29,15 +30,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<TodoItem> _todos = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo-App'),
       ),
-      body: const TodoList(),
+      body: TodoList(todos: _todos),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => debugPrint('Todo hinzufügen'),
+        onPressed: () {
+          setState(() {
+            _todos.add(const TodoItem(title: 'Neues Todo'));
+          });
+        },
         tooltip: 'Todo hinzufügen',
         child: const Icon(Icons.add),
       ),
