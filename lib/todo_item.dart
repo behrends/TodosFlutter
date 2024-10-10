@@ -28,7 +28,7 @@ class _TodoItemState extends State<TodoItem> {
               value: _done,
               onChanged: (bool? value) {
                 setState(() {
-                  _done = !_done;
+                  _done = value ?? false;
                 });
               },
             ),
