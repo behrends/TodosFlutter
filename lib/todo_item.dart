@@ -10,17 +10,27 @@ class TodoItem extends StatefulWidget {
 }
 
 class _TodoItemState extends State<TodoItem> {
+  bool _done = false;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {/* to be implemented */},
+      onTap: () {
+        setState(() {
+          _done = !_done;
+        });
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 2.0),
         child: Row(
           children: [
             Checkbox(
-              value: false,
-              onChanged: (bool? value) {/* to be implemented */},
+              value: _done,
+              onChanged: (bool? value) {
+                setState(() {
+                  _done = !_done;
+                });
+              },
             ),
             Text(
               widget.title,
