@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/todo_item.dart';
 import 'package:myapp/todo_list.dart';
@@ -31,6 +33,32 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<TodoItem> _todos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTodos();
+  }
+
+  Future<void> _loadTodos() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? todosString = prefs.getString('todos');
+
+    if (todosString != null) {
+      final List decoded = jsonDecode(todosString);
+      setState(() {
+        _todos.clear();
+        _todos.addAll(decoded.map((item) => TodoItem.fromMap(item)).toList());
+      });
+    }
+  }
+
+  Future<void> _saveTodos() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String todosString =
+        jsonEncode(_todos.map((item) => item.toMap()).toList());
+    await prefs.setString('todos', todosString);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +95,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               );
             },
-          ).then((value) { // Fügen wir das neue Todo dem State hinzu
+          ).then((value) {
             if (value != null && value is String) {
               setState(() {
                 _todos.add(TodoItem(title: value));
               });
+              _saveTodos();
             }
           });
         },
