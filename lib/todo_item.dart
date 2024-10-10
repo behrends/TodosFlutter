@@ -34,7 +34,10 @@ class _TodoItemState extends State<TodoItem> {
             ),
             Text(
               widget.title,
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(
+                fontSize: 18,
+                decoration: _done ? TextDecoration.lineThrough : null,
+              ),
             ),
           ],
         ),
