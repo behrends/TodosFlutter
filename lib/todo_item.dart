@@ -5,6 +5,21 @@ class TodoItem extends StatefulWidget {
 
   const TodoItem({super.key, required this.title});
 
+  // TodoItem in Map umwandeln (serialisieren)
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+    };
+  }
+
+  // Map in TodoItem umwandeln (deserialisieren)
+  // Factory-Konstruktor, der ein TodoItem aus einer Map erstellt
+  factory TodoItem.fromMap(Map<String, dynamic> map) {
+    return TodoItem(
+      title: map['title'],
+    );
+  }
+
   @override
   State<TodoItem> createState() => _TodoItemState();
 }
