@@ -1,38 +1,44 @@
 import 'package:flutter/material.dart';
 
-class TodoItem extends StatefulWidget {
+class Todo {
   final String title;
+  bool done;
 
-  const TodoItem({super.key, required this.title});
+  Todo({required this.title, this.done = false});
 
-  // TodoItem in Map umwandeln (serialisieren)
+  // Todo in Map umwandeln (serialisieren)
   Map<String, dynamic> toMap() {
     return {
       'title': title,
+      'done': done,
     };
   }
 
-  // Map in TodoItem umwandeln (deserialisieren)
-  // Factory-Konstruktor, der ein TodoItem aus einer Map erstellt
-  factory TodoItem.fromMap(Map<String, dynamic> map) {
-    return TodoItem(
+  // Map in Todo umwandeln (deserialisieren)
+  factory Todo.fromMap(Map<String, dynamic> map) {
+    return Todo(
       title: map['title'],
+      done: map['done'] ?? false,
     );
   }
+}
+
+class TodoItem extends StatefulWidget {
+  final Todo todo;
+
+  const TodoItem({super.key, required this.todo});
 
   @override
   State<TodoItem> createState() => _TodoItemState();
 }
 
 class _TodoItemState extends State<TodoItem> {
-  bool _done = false;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         setState(() {
-          _done = !_done;
+          widget.todo.done = !widget.todo.done;
         });
       },
       child: Padding(
@@ -40,18 +46,18 @@ class _TodoItemState extends State<TodoItem> {
         child: Row(
           children: [
             Checkbox(
-              value: _done,
+              value: widget.todo.done,
               onChanged: (bool? value) {
                 setState(() {
-                  _done = value ?? false;
+                  widget.todo.done = value ?? false;
                 });
               },
             ),
             Text(
-              widget.title,
+              widget.todo.title,
               style: TextStyle(
                 fontSize: 18,
-                decoration: _done ? TextDecoration.lineThrough : null,
+                decoration: widget.todo.done ? TextDecoration.lineThrough : null,
               ),
             ),
           ],

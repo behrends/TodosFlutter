@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final List decoded = jsonDecode(todosString);
       setState(() {
         _todos.clear();
-        _todos.addAll(decoded.map((item) => TodoItem.fromMap(item)).toList());
+        _todos.addAll(decoded.map((item) => TodoItem(todo: Todo.fromMap(item))).toList());
       });
     }
   }
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _saveTodos() async {
     final prefs = await SharedPreferences.getInstance();
     final String todosString =
-        jsonEncode(_todos.map((item) => item.toMap()).toList());
+        jsonEncode(_todos.map((item) => item.todo.toMap()).toList());
     await prefs.setString('todos', todosString);
   }
 
@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ).then((value) {
             if (value != null && value is String) {
               setState(() {
-                _todos.add(TodoItem(title: value));
+                _todos.add(TodoItem(todo: Todo(title: value)));
               });
               _saveTodos();
             }
